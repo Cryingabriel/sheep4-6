@@ -46,21 +46,11 @@ class Sheep:
         elif self.ypos+50 <= 800:
             self.ypos +=8 #move down
 
-    def collision(self, PlayerX, PlayerY):
-        if PlayerX+40 > self.xpos:
-            if PlayerX < self.xpos+40:
-                if PlayerY+40 >self.ypos:
-                    if PlayerY < self.ypos:
-                        if self.isa == False: #only catch uncaught sheeps!
-                            self.isa = True #catch da sheepies!
-                            global score #make it so this function can change this value
-                            score +=1
     def draw(self):
         SheepPic = pygame.image.load("sheep.jpg")
         if self.isa == True:
             screen.blit(SheepPic, (self.xpos, self.ypos,80,40))
-        elif self.isa == False:
-            screen.blit(SheepPic, (0,0,0))
+    
 
 pen: list[Sheep] = []
 
@@ -78,11 +68,6 @@ for i in range(nsheep):
 
 #create sheep!
 #numbers in list represent xpos, ypos, direction moving, and whether it's been caught or not!
-sheep1 = [200, 400, RIGHT, False]
-sheep2 = [200, 400, LEFT, False]
-sheep3 = [200, 400, UP, False]
-sheep4 = [200, 400, DOWN, False]
-sheep5 = [200, 300, LEFT, False]
 #make more sheeps here!
 
 
@@ -145,7 +130,14 @@ while score < nsheep: #GAME LOOP################################################
 
 
     #player/sheep collision!
-    
+        for i in range (len(pen)):
+            if pen[i].isa == True:
+                if pen[i].xpos > xpos:
+                    if pen[i].xpos < xpos + 40:
+                        if pen[i].ypos + 40 > ypos:
+                            if pen[i].ypos+40 < ypos+40:
+                                    pen[i].isa = False #catch da sheepies!#make it so this function can change this value
+                                    score +=1
 
     #update player position
     xpos+=vx 
