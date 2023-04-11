@@ -128,7 +128,17 @@ while score < nsheep: #GAME LOOP################################################
     else:
         vy = 0
 
-
+    if xpos <= 0:
+        xpos = 0
+    elif xpos >= 760:
+        xpos = 760
+    elif ypos <= 0:
+        ypos = 0
+    elif ypos >= 760:
+        ypos = 760
+    
+    
+    
     #player/sheep collision!
         for i in range (len(pen)):
             if pen[i].isa == True:
